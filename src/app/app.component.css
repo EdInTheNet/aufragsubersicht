@@ -40,5 +40,6 @@ h3 {
     display: flex;
     gap: 6%;
     margin: 4px;
+    align-items: center;
     justify-content: center;
 }

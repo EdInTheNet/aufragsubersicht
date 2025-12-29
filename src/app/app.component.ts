@@ -1,9 +1,9 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { auftragsAnsicht } from './shared/interfaces';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-root',
@@ -50,18 +50,15 @@ export class AppComponent implements OnInit {
   }
 
   routerToZeiterfassung() {
-    // einen router zur Zeiterfassung einbauen mit dem der user direkt seine Auftragszeit messen kann
-    return null;
+    window.open('https://auftragsakte.kemmlit.io/tools/auftragszeiterfassung-werk');
   }
 
   routerToMagazienApp() {
-    // Rout zur Magayien App um das Material zu bessorgen 
     return null;
   }
 
-  routToEdrawing() {
-    //rout zum Edrawing bzw window.open()
-    return null;
+  routToFotoApp() {
+    window.open('https://palettenkontrolle.kemmlit.io/main');
   }
 
   erstelleAuftrag(): void {
