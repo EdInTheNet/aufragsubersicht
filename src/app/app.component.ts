@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { auftragsAnsicht } from './shared/interfaces';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   //** HAUPTANSICHT */
 
-  auftragsId = signal<number>(0); // zuständig für die interne id verteilung pro Auftrag ( nicht sichtbar für den user)
+  id = signal<number>(0);
   auftragsNummer = signal<string>('');// BA Nummer zum Beispiel oderr interne Auftragsnummer
 
   //** NEBENANSICHT FÜR EINEN ODERER MEHRERE BESTANDTEILE EINSE AUFTRAGES Bsp. welche Teile geneau bearbeitet werden sollen */
