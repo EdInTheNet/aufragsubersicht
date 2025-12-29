@@ -1,0 +1,39 @@
+<mat-card class="main">
+    <div class="main-content">
+        <mat-card-header class="title">
+            <h2>BA: {{auftragsNummer()}}</h2>
+        </mat-card-header>
+
+        <mat-card-content>
+            <h3>{{auftragBezeichnung()}}</h3>
+            <div class="row-Tab">
+                <div class="essentialsTab">
+                    Typ:{{auftragsObjekt()}}
+                    <img style="max-width: 90%;" src="/bauplan-image.svg">
+                </div>
+                <div class="essentialsTab">
+                    Material:{{auftragsMaterial()}}
+                    <img style="max-width: 90%;" src="/hpl-image.svg">
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions class="action-row">
+
+            <button matFab extended (click)="routerToMagazienApp()"
+            matTooltip="Magazien App">
+                <mat-icon>warehouse</mat-icon>
+                Magazien App
+            </button>
+            <button matFab extended (click)="routerToZeiterfassung()"
+            matTooltip="Zeiterfassung">
+                <mat-icon>timer</mat-icon>
+                Zeiterfassung
+            </button>
+            <button matFab extended (click)="routToEdrawing()"
+            matTooltip="Technischezeichnung">
+                <mat-icon>draw</mat-icon>
+                Edrawing
+            </button>
+        </mat-card-actions>
+    </div>
+</mat-card>
