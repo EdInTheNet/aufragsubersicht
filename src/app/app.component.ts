@@ -4,6 +4,7 @@ import { auftragsAnsicht } from './shared/interfaces';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ZXingScannerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -19,12 +21,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class AppComponent implements OnInit {
 
   //** HAUPTANSICHT */
-
-  id = signal<number>(0);
-  auftragsNummer = signal<string>('');// BA Nummer zum Beispiel oderr interne Auftragsnummer
+  auftragsNummer = signal<string>('');
 
   //** NEBENANSICHT FÜR EINEN ODERER MEHRERE BESTANDTEILE EINSE AUFTRAGES Bsp. welche Teile geneau bearbeitet werden sollen */
-
   auftragBezeichnung = signal<string>(''); // Bsp. Montage, Zuschneiden, Sägen oder Kleben
   auftragsObjekt = signal<string>('');// Das Endergebeniss des Auftrages Bsp. ein Schrank 100 X 400
   auftragsMaterial = signal<string>('');// das Werkstück oder das material um das es sich handelt beim jetzigen Arbeitsschritt
@@ -33,6 +32,16 @@ export class AppComponent implements OnInit {
     this.setData();
     this.erstelleAuftrag();
   };
+
+  onScanSuccess(result: string) {
+    try {
+      const splittedResult = result.split('_');
+      if (splittedResult.length < 3) throw new Error('ungültiger QR code');
+      this.auftragsNummer.set(splittedResult.slice(0, 5).join(":"));
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   setData(): void {
     const testDaten: any[] = [
@@ -45,12 +54,8 @@ export class AppComponent implements OnInit {
     this.auftragsMaterial.set(d.AuftraggsMaterial);
   };
 
-  callImageUrl() {
-    //TODO Stock Bilder für alle Material und Auftrags Arten suchen und einfügen und dann abrufen
-  }
-
   routerToZeiterfassung() {
-    window.open('https://auftragsakte.kemmlit.io/tools/auftragszeiterfassung-werk');
+    window.open('https://auftragsakte.kemmlit.io/tools/auftragszeiterfassung-werk'); // soll später eine rout sein 
   }
 
   routerToMagazienApp() {
@@ -58,7 +63,7 @@ export class AppComponent implements OnInit {
   }
 
   routToFotoApp() {
-    window.open('https://palettenkontrolle.kemmlit.io/main');
+    window.open('https://palettenkontrolle.kemmlit.io/main'); // soll später eine rout sein
   }
 
   erstelleAuftrag(): void {

@@ -1,4 +1,16 @@
 <mat-card class="main">
+    @if (!auftragsNummer()) {
+    <div class="qr-scanner">
+        <zxing-scanner [autofocusEnabled]="true" (scanSuccess)="onScanSuccess($event)"></zxing-scanner>
+        <div class="scan-overlay">
+            <span class="corner tl"></span>
+            <span class="corner tr"></span>
+            <span class="corner bl"></span>
+            <span class="corner br"></span>
+        </div>
+    </div>
+    }@else {
+
     <div class="main-content">
         <mat-card-header class="title">
             <h2>BA: {{auftragsNummer()}}</h2>
@@ -19,21 +31,20 @@
         </mat-card-content>
         <mat-card-actions class="action-row">
 
-            <button matFab extended (click)="routerToMagazienApp()"
-            matTooltip="Magazien App">
+            <button matFab extended (click)="routerToMagazienApp()" matTooltip="Magazien App">
                 <mat-icon>warehouse</mat-icon>
                 Magazien App
             </button>
-            <button matFab extended (click)="routerToZeiterfassung()"
-            matTooltip="Zeiterfassung">
+            <button matFab extended (click)="routerToZeiterfassung()" matTooltip="Zeiterfassung">
                 <mat-icon>timer</mat-icon>
                 Zeiterfassung
             </button>
-            <button matFab extended (click)="routToFotoApp()"
-            matTooltip="Qualitäts Bilder">
+            <button matFab extended (click)="routToFotoApp()" matTooltip="Qualitäts Bilder">
                 <mat-icon>draw</mat-icon>
                 Palettenkontrolle
             </button>
         </mat-card-actions>
     </div>
+    }
+
 </mat-card>
